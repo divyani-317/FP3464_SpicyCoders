@@ -14,20 +14,38 @@ public class Cart {
 
     // Set method
     public void addToCart(Pizza pizza) {
-       try {
-           items.add(pizza);
-           System.out.println(pizza.getName() + " added to your cart.");
-       }
-       catch(Exception ex){
-           System.out.println(ex.getMessage());
-       }
+        try {
+            items.add(pizza);
+            System.out.println(pizza.getName() + " added to your cart.");
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
     }
 
-    public void displayCart() {
+    public void removeFromCart(int choice) {
+        try {
+            int index = choice - 1;
+            if (index >= 0 && index < items.size()) {
+                Pizza removedPizza = items.remove(index);
+                System.out.println(removedPizza.getName() + " removed from your cart.");
+            }
+            else {
+                System.out.println("Invalid index. Pizza not removed from the cart.");
+            }
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void displayCart() { //display items in the cart
         try {
             System.out.println("\nYour Cart:");
+            int index = 1;
             for (Pizza pizza : items) {
-                System.out.println(pizza.getName() + " - "+currencySymbol+"" + pizza.getPrice());
+                System.out.println(index + ". " + pizza.getName() + " - "+currencySymbol+"" + pizza.getPrice());
+                index++;
             }
             System.out.println("Total: "+currencySymbol+"" + calculateCartTotal());
         }
@@ -38,9 +56,9 @@ public class Cart {
 
     public void clearCart() {
         items.clear();
-    }
+    }  //clears the cart
 
-    public double calculateCartTotal() {
+    public double calculateCartTotal() { //calculate the total from the cart
         double totalPrice = 0.0;
         try {
             for (Pizza pizza : items) {

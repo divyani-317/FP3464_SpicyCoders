@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Menu {
     private List<Pizza> menuItems;
-
     public Menu() {
         this.menuItems = new ArrayList<>();
         initMenu();
@@ -37,12 +37,24 @@ public class Menu {
     }
 
     public void processMenuChoice(int choice, Cart cart) {
-       try {
-           Pizza pizza = menuItems.get(choice - 1);
-           cart.addToCart(pizza);
-       }
+        try {
+            Pizza pizza = menuItems.get(choice - 1);
+            cart.addToCart(pizza);
+        }
         catch(Exception ex){
             System.out.println(ex.getMessage());
         }
+    }
+    public void RemoveSelectedPizza(int choice, Cart cart) {
+        try {
+            cart.removeFromCart(choice);
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    public void UpdateCustomPiza(CustomPizza customPizza) {
+        menuItems.remove(4);
+        menuItems.add(customPizza);
     }
 }
